@@ -1,21 +1,18 @@
 import React, { useState, useCallback } from "react";
 import { Button } from "@material-ui/core";
 import ModalBookForm from "./ModalBookForm";
+import { useBookManagerState } from "../context/bookManager";
+import BookTable from "./BookTable";
 
 const Main = () => {
-  const [openModal, setOpenModal] = useState(false);
-  const handleOpen = useCallback(() => {
-    setOpenModal(true);
-  }, []);
-  const handleClose = useCallback(() => {
-    setOpenModal(false);
-  }, []);
+  const bookManagerState = useBookManagerState();
+
   return (
     <>
-      <Button onClick={handleOpen} color={"primary"}>
-        Hola Mundo
-      </Button>
-      <ModalBookForm openModal={openModal} handleClose={handleClose} />
+      <BookTable
+        rows={bookManagerState.books}
+        tagList={bookManagerState.tags}
+      />
     </>
   );
 };
