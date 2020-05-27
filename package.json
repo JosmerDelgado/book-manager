@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^7.1.2",
     "flow-bin": "^0.125.1",
     "lockr": "^0.8.5",
+    "formik": "^2.1.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1"

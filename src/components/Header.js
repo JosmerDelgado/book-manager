@@ -30,7 +30,7 @@ const Header = () => {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            News
+            Book Manager
           </Typography>
           <Button
             color="inherit"

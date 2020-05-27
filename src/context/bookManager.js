@@ -1,8 +1,7 @@
 import React from "react";
 import { createTag } from "../model/tagType";
 import uniqid from "uniqid";
-import { bookCreator } from "../model/bookType";
-import Lockr from "lockr";
+import { saveLocalStorageData, getLocalStorageData } from "../storageManager";
 
 export const actionsType = {
   newBook: "newBook",
@@ -106,14 +105,13 @@ function bookReducer(state, { type, book }) {
   }
 }
 const init = (initialValues) => {
-  // call to local storage here
-  const prevData = Lockr.get("bookManager");
-  return prevData || initialValues; // or localStorage Values
+  const prevData = getLocalStorageData();
+  return prevData || initialValues;
 };
 
 const bookReducerAndSave = (state, action) => {
   const result = bookReducer(state, action);
-  Lockr.set("bookManager", result);
+  saveLocalStorageData(result);
   return result;
 };
 
