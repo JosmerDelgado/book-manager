@@ -13,6 +13,7 @@ import {
   modalActionTypes,
 } from "../context/bookModal";
 import { useBookManagerState } from "../context/bookManager";
+import { Link, useNavigate, navigate } from "@reach/router";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -32,6 +33,22 @@ const Header = () => {
           <Typography variant="h6" className={classes.title}>
             Book Manager
           </Typography>
+          <Button
+            color="inherit"
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            All Books
+          </Button>
+          <Button
+            color="inherit"
+            onClick={() => {
+              navigate("lists");
+            }}
+          >
+            Books by list
+          </Button>
           <Button
             color="inherit"
             onClick={() => {

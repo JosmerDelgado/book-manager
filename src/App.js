@@ -1,16 +1,11 @@
 import React from "react";
 import Main from "./components/Main";
 import { BookManagerProvider } from "./context/bookManager";
-import {
-  makeStyles,
-  AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-  Button,
-} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import Header from "./components/Header";
 import { ModalProvider } from "./context/bookModal";
+import { Router } from "@reach/router";
+import ListsContainer from "./components/ListsContainer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,7 +20,10 @@ function App() {
       <BookManagerProvider>
         <ModalProvider>
           <Header />
-          <Main />
+          <Router>
+            <Main path="/" />
+            <ListsContainer path="/lists" />
+          </Router>
         </ModalProvider>
       </BookManagerProvider>
     </div>

@@ -24,31 +24,43 @@ const useStyles = makeStyles({
     minWidth: 650,
   },
   img: {
-    height: 100,
-    width: 100,
+    height: 60,
+    width: 60,
   },
   formControl: {
     margin: 8,
     minWidth: 120,
+  },
+  button: {
+    margin: 8,
   },
 });
 
 const BookTable = ({ rows, tagList }) => {
   const bookManagerDispatch = useBookManagerDispatch();
   const [tagIndex, setTagIndex] = useState("");
+  const [page, setPage] = useState(1);
   const modalDipatch = useModalDispatch();
+  const filteredRows =
+    tagIndex !== "" ? rows.filter((row) => row.tags.includes(tagIndex)) : rows;
   const onEdit = (book) => {
     modalDipatch({ type: modalActionTypes.openEditBook, book });
   };
   const onDeleteBook = (values) => {
+    console.log({ myCondition: (filteredRows.length - 1) % 5 === 0 });
+    if ((filteredRows.length - 1) % 5 === 0) {
+      setPage(page - 1);
+    }
     bookManagerDispatch({ type: actionsType.deleteBook, book: values });
   };
   const handleChange = (event) => {
     setTagIndex(event.target.value);
   };
   const classes = useStyles();
-  const filteredRows =
-    tagIndex !== "" ? rows.filter((row) => row.tags.includes(tagIndex)) : rows;
+
+  const totalPages = Math.ceil(filteredRows.length / 5);
+  const paginatedRow = filteredRows.slice((page - 1) * 5, page * 5);
+  console.log({ paginatedRow, filteredRows });
   return (
     <>
       <Grid container alignItems={"flex-end"}>
@@ -92,7 +104,7 @@ const BookTable = ({ rows, tagList }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredRows.map((row) => (
+            {paginatedRow.map((row) => (
               <TableRow key={row.uuid}>
                 <TableCell component="th" scope="row">
                   {row.title}
@@ -119,6 +131,7 @@ const BookTable = ({ rows, tagList }) => {
                   <Button
                     variant="contained"
                     color="secondary"
+                    className={classes.button}
                     onClick={() => {
                       onDeleteBook(row);
                     }}
@@ -131,6 +144,26 @@ const BookTable = ({ rows, tagList }) => {
           </TableBody>
         </Table>
       </TableContainer>
+      {filteredRows.length >= 5 && (
+        <Grid container justify="space-between">
+          <Grid item>
+            <Button disabled={page === 1} onClick={() => setPage(page - 1)}>
+              Prev
+            </Button>
+          </Grid>
+          <Grid item>
+            {page}/{totalPages}
+          </Grid>
+          <Grid item>
+            <Button
+              disabled={page === totalPages}
+              onClick={() => setPage(page + 1)}
+            >
+              Next
+            </Button>
+          </Grid>
+        </Grid>
+      )}
     </>
   );
 };
