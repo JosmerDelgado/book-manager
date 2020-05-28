@@ -13,7 +13,7 @@ export const actionsType = {
 
 const BookStateContext = React.createContext();
 const BookDispatchContext = React.createContext();
-function bookReducer(state, { type, book }) {
+function bookReducer(state, { type, book, listedBooks, listName }) {
   switch (type) {
     case actionsType.newBook: {
       book.uuid = uniqid();
@@ -99,6 +99,11 @@ function bookReducer(state, { type, book }) {
         tags: [...state.tags],
       };
     }
+    case actionsType.newList: {
+      // listedBooks
+      // listName
+      return { ...state };
+    }
     default: {
       throw new Error(`Unhandled action type: ${type}`);
     }
@@ -136,7 +141,7 @@ function BookManagerProvider({ children }) {
         },
       ],
       tags: [createTag("first"), createTag("second"), createTag("third")],
-      bookList: [],
+      bookList: { February: ["kamxj46u", "kamxj46u2"], January: ["kamxj46u2"] },
     },
     init
   );

@@ -1,16 +1,13 @@
 import React from "react";
 import { useBookManagerState } from "../context/bookManager";
-import BookTable from "./BookTable";
+import BookFilteredTable from "./BookFilteredTable";
 
 const Main = () => {
   const bookManagerState = useBookManagerState();
 
   return (
     <>
-      <BookTable
-        rows={bookManagerState.books}
-        tagList={bookManagerState.tags}
-      />
+      <BookFilteredTable rows={bookManagerState.books} />
     </>
   );
 };
