@@ -6,11 +6,13 @@ import {
   ExpansionPanelDetails,
   Grid,
   Button,
+  IconButton,
 } from "@material-ui/core";
 import ExpandMoreIcon from "../icons/ExpandMore";
 import BookTable from "./BookTable";
 import { useBookManagerState } from "../context/bookManager";
 import ModalNewList from "./ModalNewList";
+import DeleteIcon from "../icons/DeleteIcon";
 
 const ListsContainer = () => {
   const { books, bookList } = useBookManagerState();
@@ -56,24 +58,33 @@ const ListsContainer = () => {
               aria-controls="panel1bh-content"
               id="panel1bh-header"
             >
-              <Typography>{listName}</Typography>
+              <>
+                <Typography>{listName}</Typography>
+                <IconButton
+                  aria-label="delete"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    console.log("DELETE");
+                  }}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
-              <BookTable
-                rows={listedBooks}
-                actions={[
-                  {
-                    colorType: "secondary",
-                    action: onDeleteBook,
-                    text: "Delete",
-                  },
-                ]}
-              />
+              <BookTable rows={listedBooks} />
             </ExpansionPanelDetails>
           </ExpansionPanel>
         );
       })}
-      <ModalNewList open={isOpen} onCloseModal={onCloseModal} books={books} />
+      {isOpen && (
+        <ModalNewList
+          open={isOpen}
+          onCloseModal={onCloseModal}
+          books={books}
+          listOfNames={Object.keys(bookList)}
+        />
+      )}
     </div>
   );
 };

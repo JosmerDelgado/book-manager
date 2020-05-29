@@ -13,7 +13,7 @@ export const actionsType = {
 
 const BookStateContext = React.createContext();
 const BookDispatchContext = React.createContext();
-function bookReducer(state, { type, book, listedBooks, listName }) {
+function bookReducer(state, { type, book, listOfBooks }) {
   switch (type) {
     case actionsType.newBook: {
       book.uuid = uniqid();
@@ -102,7 +102,9 @@ function bookReducer(state, { type, book, listedBooks, listName }) {
     case actionsType.newList: {
       // listedBooks
       // listName
-      return { ...state };
+      const [[key, bookList]] = Object.entries(listOfBooks);
+      const bookWithId = { [key]: bookList.map((myBook) => myBook.uuid) };
+      return { ...state, bookList: { ...state.bookList, ...bookWithId } };
     }
     default: {
       throw new Error(`Unhandled action type: ${type}`);

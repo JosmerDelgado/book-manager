@@ -1,6 +1,6 @@
 import React from "react";
 import { useDrag } from "react-dnd";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, Grid, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
   img: {
@@ -28,10 +28,23 @@ const DraggableBook = ({ book, handleBookSelection }) => {
   });
   const classes = useStyles({ isDragging });
   return (
-    <div ref={drag} className={classes.bookRow}>
-      {book.title}
-      <img className={classes.img} src={book.imageURL} alt={"BookImage"}></img>
-    </div>
+    <Grid
+      container
+      justify={"space-between"}
+      ref={drag}
+      className={classes.bookRow}
+    >
+      <Grid item xs={9}>
+        <Typography>{book.title}</Typography>
+      </Grid>
+      <Grid item xs={3}>
+        <img
+          className={classes.img}
+          src={book.imageURL}
+          alt={"BookImage"}
+        ></img>
+      </Grid>
+    </Grid>
   );
 };
 

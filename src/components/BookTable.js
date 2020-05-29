@@ -21,7 +21,7 @@ const useStyles = makeStyles({
     width: 60,
   },
 });
-const BookTable = ({ rows, actions }) => {
+const BookTable = ({ rows, actions = [] }) => {
   const classes = useStyles();
   const { tags: tagList } = useBookManagerState();
   return (
@@ -33,7 +33,7 @@ const BookTable = ({ rows, actions }) => {
             <TableCell align="right">Description</TableCell>
             <TableCell align="right">Tags</TableCell>
             <TableCell align="right">Image</TableCell>
-            <TableCell align="center">Actions</TableCell>
+            {!!actions.length && <TableCell align="center">Actions</TableCell>}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -53,17 +53,19 @@ const BookTable = ({ rows, actions }) => {
                   alt={"imageURL"}
                 />
               </TableCell>
-              <TableCell align="center">
-                {actions.map((action) => (
-                  <Button
-                    variant="contained"
-                    color={action.colorType}
-                    onClick={() => action.action(row)}
-                  >
-                    {action.text}
-                  </Button>
-                ))}
-              </TableCell>
+              {!!actions.length && (
+                <TableCell align="center">
+                  {actions.map((action) => (
+                    <Button
+                      variant="contained"
+                      color={action.colorType}
+                      onClick={() => action.action(row)}
+                    >
+                      {action.text}
+                    </Button>
+                  ))}
+                </TableCell>
+              )}
             </TableRow>
           ))}
         </TableBody>

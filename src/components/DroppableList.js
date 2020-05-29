@@ -13,6 +13,7 @@ const useStyles = makeStyles(() => ({
       return "#fff";
     },
   },
+  title: { textAlign: "center" },
 }));
 
 const DroppableList = ({ selectedBooks }) => {
@@ -27,7 +28,7 @@ const DroppableList = ({ selectedBooks }) => {
   const classes = useStyles({ canDrop, isOver });
   return (
     <div ref={drop} className={classes.dropZone}>
-      Add Book
+      <div className={classes.title}>Drag and Drop books Here</div>
       {selectedBooks.map((book) => (
         <div>{book.title}</div>
       ))}
