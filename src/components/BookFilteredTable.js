@@ -1,12 +1,5 @@
 import React, { useState } from "react";
 import {
-  TableContainer,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-  Paper,
   Button,
   MenuItem,
   Select,
@@ -46,7 +39,6 @@ const BookFilteredTable = ({ rows }) => {
     modalDipatch({ type: modalActionTypes.openEditBook, book });
   };
   const onDeleteBook = (values) => {
-    console.log({ myCondition: (filteredRows.length - 1) % 5 === 0 });
     if ((filteredRows.length - 1) % 5 === 0) {
       setPage(page - 1);
     }
@@ -59,7 +51,6 @@ const BookFilteredTable = ({ rows }) => {
 
   const totalPages = Math.ceil(filteredRows.length / 5);
   const paginatedRow = filteredRows.slice((page - 1) * 5, page * 5);
-  console.log({ paginatedRow, filteredRows });
   return (
     <>
       <Grid container alignItems={"flex-end"}>

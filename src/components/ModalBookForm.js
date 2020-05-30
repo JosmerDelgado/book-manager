@@ -22,7 +22,6 @@ const ModalBookForm = ({ openModal, bookInfo, handleClose, tagList }) => {
       tags: bookInfo.tags ? bookInfo.tags.map((tag) => tagList[tag].name) : [],
     },
     onSubmit: (values) => {
-      console.log(JSON.stringify(values, null, 2));
       if (bookInfo.uuid) {
         bookManagerDispatcher({ type: actionsType.editBook, book: values });
       } else {

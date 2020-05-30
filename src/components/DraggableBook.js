@@ -18,7 +18,6 @@ const DraggableBook = ({ book, handleBookSelection }) => {
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult();
       if (item && dropResult) {
-        console.log(`You dropped ${item.book.title} into ${dropResult.name}!`);
         handleBookSelection(item.book);
       }
     },

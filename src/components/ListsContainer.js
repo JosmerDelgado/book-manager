@@ -10,20 +10,26 @@ import {
 } from "@material-ui/core";
 import ExpandMoreIcon from "../icons/ExpandMore";
 import BookTable from "./BookTable";
-import { useBookManagerState } from "../context/bookManager";
+import {
+  useBookManagerState,
+  useBookManagerDispatch,
+  actionsType,
+} from "../context/bookManager";
 import ModalNewList from "./ModalNewList";
 import DeleteIcon from "../icons/DeleteIcon";
 
 const ListsContainer = () => {
   const { books, bookList } = useBookManagerState();
+  const manageBookDispatcher = useBookManagerDispatch();
   const [isOpen, setOpen] = useState();
   const [expanded, setExpanded] = useState();
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
   const onCloseModal = () => setOpen(false);
-  const onDeleteBook = (data) => {
-    console.log({ data });
+  const onDeleteLIst = (listName) => (event) => {
+    event.stopPropagation();
+    manageBookDispatcher({ type: actionsType.deleteList, listName });
   };
   return (
     <div>
@@ -58,18 +64,19 @@ const ListsContainer = () => {
               aria-controls="panel1bh-content"
               id="panel1bh-header"
             >
-              <>
-                <Typography>{listName}</Typography>
-                <IconButton
-                  aria-label="delete"
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    console.log("DELETE");
-                  }}
-                >
-                  <DeleteIcon />
-                </IconButton>
-              </>
+              <Grid container justify="space-between" alignItems={"center"}>
+                <Grid item>
+                  <Typography>{listName}</Typography>
+                </Grid>
+                <Grid item>
+                  <IconButton
+                    aria-label="delete"
+                    onClick={onDeleteLIst(listName)}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </Grid>
+              </Grid>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
               <BookTable rows={listedBooks} />

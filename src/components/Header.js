@@ -13,7 +13,7 @@ import {
   modalActionTypes,
 } from "../context/bookModal";
 import { useBookManagerState } from "../context/bookManager";
-import { Link, useNavigate, navigate } from "@reach/router";
+import { navigate } from "@reach/router";
 
 const useStyles = makeStyles((theme) => ({
   title: {
