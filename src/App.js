@@ -1,11 +1,11 @@
 import React from "react";
-import Main from "./components/Main";
+import Main from "./components/screens/Main";
 import { BookManagerProvider } from "./context/bookManager";
 import { makeStyles } from "@material-ui/core";
-import Header from "./components/Header";
+import Header from "./components/screens/Header";
 import { ModalProvider } from "./context/bookModal";
 import { Router } from "@reach/router";
-import ListsContainer from "./components/ListsContainer";
+import ListsContainer from "./components/screens/ListsContainer";
 
 const useStyles = makeStyles((theme) => ({
   root: {

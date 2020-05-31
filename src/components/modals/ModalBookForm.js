@@ -3,7 +3,7 @@ import { Modal, Grid, TextField, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import ChipInput from "material-ui-chip-input";
 import { useFormik } from "formik";
-import { useBookManagerDispatch, actionsType } from "../context/bookManager";
+import { useBookManagerDispatch, actionsType } from "../../context/bookManager";
 import { modalStyles } from "./modal.styles";
 
 const useStyles = makeStyles((theme) => ({

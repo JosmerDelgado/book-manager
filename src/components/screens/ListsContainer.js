@@ -8,15 +8,15 @@ import {
   Button,
   IconButton,
 } from "@material-ui/core";
-import ExpandMoreIcon from "../icons/ExpandMore";
-import BookTable from "./BookTable";
+import ExpandMoreIcon from "../../icons/ExpandMore";
+import BookTable from "../common/BookTable";
 import {
   useBookManagerState,
   useBookManagerDispatch,
   actionsType,
-} from "../context/bookManager";
-import ModalNewList from "./ModalNewList";
-import DeleteIcon from "../icons/DeleteIcon";
+} from "../../context/bookManager";
+import ModalNewList from "../modals/ModalNewList";
+import DeleteIcon from "../../icons/DeleteIcon";
 
 const ListsContainer = () => {
   const { books, bookList } = useBookManagerState();

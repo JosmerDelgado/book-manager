@@ -6,13 +6,13 @@ import {
   Button,
   makeStyles,
 } from "@material-ui/core";
-import ModalBookForm from "./ModalBookForm";
+import ModalBookForm from "../modals/ModalBookForm";
 import {
   useModalState,
   useModalDispatch,
   modalActionTypes,
-} from "../context/bookModal";
-import { useBookManagerState } from "../context/bookManager";
+} from "../../context/bookModal";
+import { useBookManagerState } from "../../context/bookManager";
 import { navigate } from "@reach/router";
 
 const useStyles = makeStyles((theme) => ({

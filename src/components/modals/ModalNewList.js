@@ -10,9 +10,9 @@ import {
 import { modalStyles } from "./modal.styles";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import DraggableBook from "./DraggableBook";
-import DroppableList from "./DroppableList";
-import { useBookManagerDispatch, actionsType } from "../context/bookManager";
+import DraggableBook from "./newList/DraggableBook";
+import DroppableList from "./newList/DroppableList";
+import { useBookManagerDispatch, actionsType } from "../../context/bookManager";
 
 const useStyles = makeStyles((theme) => ({
   ...modalStyles(theme),

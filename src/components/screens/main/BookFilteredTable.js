@@ -13,9 +13,9 @@ import {
   useBookManagerDispatch,
   actionsType,
   useBookManagerState,
-} from "../context/bookManager";
-import { useModalDispatch, modalActionTypes } from "../context/bookModal";
-import BookTable from "./BookTable";
+} from "../../../context/bookManager";
+import { useModalDispatch, modalActionTypes } from "../../../context/bookModal";
+import BookTable from "../../common/BookTable";
 
 const useStyles = makeStyles({
   formControl: {
