@@ -117,6 +117,23 @@ describe("bookManager Tests", () => {
       expect(result.books[0].tags).toStrictEqual([0, 2]);
       expect(result.tags[1].count).toBe(0);
     });
+    it("edit fields with tags edition empty tags", () => {
+      const result = bookReducer(state, {
+        type: actionsType.editBook,
+        book: {
+          title: "Test1",
+          description: "Description test1",
+          imageURL: "test image1",
+          uuid: "asd123",
+          tags: [],
+        },
+      });
+      expect(result.books[0].title).toBe("Test1");
+      expect(result.books[0].description).toBe("Description test1");
+      expect(result.books[0].imageURL).toBe("test image1");
+      expect(result.books[0].tags).toStrictEqual([]);
+      expect(result.tags[0].count).toBe(0);
+    });
   });
   describe("action deleteBook", () => {
     const state = {

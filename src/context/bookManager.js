@@ -60,47 +60,47 @@ export function bookReducer(
       const elementIndex = state.books.findIndex(
         (thisBook) => thisBook.uuid === book.uuid
       );
-      if (book.tags.length > 0) {
-        const prevTags = state.books[elementIndex].tags.map(
-          (prevTag) => state.tags[prevTag].name
+
+      const prevTags = state.books[elementIndex].tags.map(
+        (prevTag) => state.tags[prevTag].name
+      );
+      const currentTags = book.tags;
+      const deletedTags = prevTags.filter(
+        (thisTag) => !currentTags.includes(thisTag)
+      );
+      deletedTags.forEach((tagDeleted) => {
+        const deletedIndex = state.tags.findIndex(
+          (tag) => tag.name === tagDeleted
         );
-        const currentTags = book.tags;
-        const deletedTags = prevTags.filter(
-          (thisTag) => !currentTags.includes(thisTag)
+        state.tags[deletedIndex] = createTag(
+          state.tags[deletedIndex].name,
+          state.tags[deletedIndex].count - 1
         );
-        deletedTags.forEach((tagDeleted) => {
-          const deletedIndex = state.tags.findIndex(
-            (tag) => tag.name === tagDeleted
+      });
+      const newTags = currentTags.filter(
+        (thisTag) => !prevTags.includes(thisTag)
+      );
+      const newIndexTags = newTags.map((newTag) => {
+        const tagIndex = state.tags.findIndex((tag) => tag.name === newTag);
+        if (tagIndex < 0) {
+          state.tags.push(createTag(newTag));
+          return state.tags.length - 1;
+        } else {
+          state.tags[tagIndex] = createTag(
+            newTag,
+            state.tags[tagIndex].count + 1
           );
-          state.tags[deletedIndex] = createTag(
-            state.tags[deletedIndex].name,
-            state.tags[deletedIndex].count - 1
-          );
-        });
-        const newTags = currentTags.filter(
-          (thisTag) => !prevTags.includes(thisTag)
-        );
-        const newIndexTags = newTags.map((newTag) => {
-          const tagIndex = state.tags.findIndex((tag) => tag.name === newTag);
-          if (tagIndex < 0) {
-            state.tags.push(createTag(newTag));
-            return state.tags.length - 1;
-          } else {
-            state.tags[tagIndex] = createTag(
-              newTag,
-              state.tags[tagIndex].count + 1
-            );
-            return tagIndex;
-          }
-        });
-        const tagsKeeped = currentTags.filter((thisTag) =>
-          prevTags.includes(thisTag)
-        );
-        const keepedIndexTags = tagsKeeped.map((keepedTag) =>
-          state.tags.findIndex((tag) => tag.name === keepedTag)
-        );
-        book.tags = [...keepedIndexTags, ...newIndexTags];
-      }
+          return tagIndex;
+        }
+      });
+      const tagsKeeped = currentTags.filter((thisTag) =>
+        prevTags.includes(thisTag)
+      );
+      const keepedIndexTags = tagsKeeped.map((keepedTag) =>
+        state.tags.findIndex((tag) => tag.name === keepedTag)
+      );
+      book.tags = [...keepedIndexTags, ...newIndexTags];
+
       state.books.splice(elementIndex, 1, book);
       return { ...state, books: [...state.books], tags: [...state.tags] };
     }
