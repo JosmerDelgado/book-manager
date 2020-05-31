@@ -8,7 +8,7 @@ export const modalActionTypes = {
 
 const ModalStateContext = React.createContext();
 const ModalDispatchContext = React.createContext();
-function modalReducer(state, { type, book }) {
+export function modalReducer(state, { type, book }) {
   switch (type) {
     case modalActionTypes.openNewBook: {
       return { isOpen: true, bookInfo: {} };

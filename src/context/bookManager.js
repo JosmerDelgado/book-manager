@@ -1,7 +1,11 @@
+// @flow
+
 import React from "react";
 import { createTag } from "../model/tagType";
 import uniqid from "uniqid";
 import { saveLocalStorageData, getLocalStorageData } from "../storageManager";
+import { type book as bookType } from "../model/bookType";
+import { type tag as tagType } from "../model/tagType";
 
 export const actionsType = {
   newBook: "newBook",
@@ -11,9 +15,25 @@ export const actionsType = {
   deleteList: "deleteList",
 };
 
+type parameterReducer = {
+  type: $Values<actionsType>,
+  book: bookType,
+  listOfBooks: { [string]: [bookType] },
+  listName: string,
+};
+
+type returnReducer = {
+  books: [bookType],
+  tags: [tagType],
+  bookList: bookList,
+};
+
 const BookStateContext = React.createContext();
 const BookDispatchContext = React.createContext();
-function bookReducer(state, { type, book, listOfBooks, listName }) {
+export function bookReducer(
+  state,
+  { type, book, listOfBooks, listName }: parameterReducer
+): returnReducer {
   switch (type) {
     case actionsType.newBook: {
       book.uuid = uniqid();
@@ -141,24 +161,9 @@ function BookManagerProvider({ children }) {
   const [state, dispatch] = React.useReducer(
     bookReducerAndSave,
     {
-      books: [
-        {
-          title: "Title",
-          description: "Description",
-          imageURL: "https://picsum.photos/200/300",
-          tags: [0, 1, 2],
-          uuid: "kamxj46u",
-        },
-        {
-          title: "Title2",
-          description: "Description2",
-          imageURL: "https://picsum.photos/200/300",
-          tags: [],
-          uuid: "kamxj46u2",
-        },
-      ],
-      tags: [createTag("first"), createTag("second"), createTag("third")],
-      bookList: { February: ["kamxj46u", "kamxj46u2"], January: ["kamxj46u2"] },
+      books: [],
+      tags: [],
+      bookList: {},
     },
     init
   );
