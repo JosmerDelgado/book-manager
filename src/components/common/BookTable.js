@@ -38,7 +38,7 @@ const BookTable = ({ rows, actions = [] }) => {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow key={row.uuid}>
+            <TableRow key={row.uuid} data-testid={"book-row"}>
               <TableCell component="th" scope="row">
                 {row.title}
               </TableCell>
@@ -54,10 +54,11 @@ const BookTable = ({ rows, actions = [] }) => {
                 />
               </TableCell>
               {!!actions.length && (
-                <TableCell align="center">
+                <TableCell align="center" data-testid={"action-row"}>
                   {actions.map((action) => (
                     <Button
                       variant="contained"
+                      data-testid={`action-row-${action.text}`}
                       color={action.colorType}
                       onClick={() => action.action(row)}
                     >

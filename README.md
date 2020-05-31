@@ -1,3 +1,91 @@
+## Time invested
+
+Aprox 15-16 hours spend coding.
+
+## Solution thinking
+
+At context/bookManager.js you will find bookReducer function that contains the harder part of this code, I think can simplify some of this logic, because there is lot of duplicated code. That is why I focus unit test in that functionality, maybe thinking in a future refactor.
+
+I never work before with drag and drop functionality, I thought this were going to be a hard part, but with a library help me a lot.
+
+## Decisions before start coding
+
+### TS vs Flow
+
+TS is a more strucured way to type in JS in other hand Flow allow you a softer way to type your componets or functions.
+
+### Redux(flux) vs Context vs Prop drilling
+
+- Redux is a very good library to handle state management but also have an impact based in all base configurations(boilerplate), to small projects is not recomended even by themselves.
+- Context is a API provided by React that provide us a simple way to manage states.
+- Prop drilling is a very bad practice and make our code hard to follow
+
+### Material-UI vs others
+
+I like the default styles and the customization tools that provide Material-UI.
+
+### formik vs Non-formik
+
+Formik is a formidable library, that provide a set of tools that help us to create and manage forms in an easy way.
+
+## Project structure
+
+### components (src/components)
+
+Here are all the React component used in this app, with his own distribution based on how are used.
+
+#### common (components/common)
+
+Here are components used in different screens or modals
+
+#### modals (components/modals)
+
+All custom modals used in this app.
+
+#### screens (components/screens)
+
+This contains the main screens used in this app. this use to have some subfolders with the components used in every screen.
+
+### context (src/context)
+
+There we can find some React contex used around the app, used with a particular design based in this (blog article)[https://kentcdodds.com/blog/how-to-use-react-context-effectively/]
+
+### model (src/project)
+
+As part of develop process is very important define some models that will help us to have the same object structure around the project
+
+### icons (src/icons)
+
+Some svg icons used as React components
+
+### Libraries
+
+This project use multiple libraries to manage local storage, to create unique identificator, to use styled components, to handle drag and drop, and all those that Create React app include for us.
+
+### Local Storage manager
+
+[Lockr](https://www.npmjs.com/package/lockr): That allow me a easy control of the local storage, specially allow me create objects inside of local storage(w/o cast to string).
+
+### Unique identificator
+
+[uniqid](https://www.npmjs.com/package/uniqid): that help me to create identificator based on multiple factors to avoid duplication.
+
+### Styled components:
+
+[@material-ui/core](https://www.npmjs.com/package/@material-ui/core): that provide a group of styled components.
+
+### Static type checker
+
+[flow-bin](https://www.npmjs.com/package/flow-bin): this library is helpful at the develop process to know the types of every variable, parameter or function return.
+
+## Before start and after clone
+
+To start working and using this app you will have to run
+
+### `yarn install`
+
+download all needed libraries
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

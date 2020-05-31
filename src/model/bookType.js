@@ -1,7 +1,7 @@
 // @flow
 
 export type book = {
-  uuid: number,
+  uuid: string,
   title: string,
   description: string,
   tags: [string],
@@ -10,7 +10,7 @@ export type book = {
 };
 
 export const bookCreator = (
-  uuid: number,
+  uuid: string,
   title: string,
   description: string,
   tags: [string],
